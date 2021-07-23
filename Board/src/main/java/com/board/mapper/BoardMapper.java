@@ -1,4 +1,4 @@
-//데이터베이스와 통신 역할을 하는 Mapper 인터페이스
+
 package com.board.mapper;
 
 import java.util.List;
