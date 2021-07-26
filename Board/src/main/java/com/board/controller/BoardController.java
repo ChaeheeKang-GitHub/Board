@@ -2,6 +2,9 @@
 
 package com.board.controller;
 
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -18,7 +21,7 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;	
 	
-	// board/write.do 페이지화면
+	// board/write.do 페이지화면 - 게시글 작성하는 화면
 	@GetMapping(value ="/board/write.do")
 	public String OpenBoardWrite(@RequestParam(value="idx",required=false) Long idx, Model model) {
 		if(idx==null) {
@@ -34,7 +37,7 @@ public class BoardController {
 		return "board/write";
 	}
 	
-	// /board/register.do 페이지 화면
+	// /board/register.do 페이지 화면 - 게시글 등록하는 화면
 	@PostMapping(value="/board/register.do")
 	public String registerBoard(final BoardDTO params) {
 		try {
@@ -49,4 +52,25 @@ public class BoardController {
 		}
 		return "redirect:/board/list.do";
 	}
+	
+	// /board/list.do 페이지 화면 - 게시글 리스트 화면을 보여주는 화면
+	@GetMapping(value = "/board/list.do")
+	public String openBoardList(Model model) {
+		List<BoardDTO> boardList = boardService.getBoardList();
+		model.addAttribute("boardList", boardList);
+
+		return "board/list";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
