@@ -25,6 +25,7 @@ public class BoardServicelmpl implements BoardService{
 		}else {
 			queryResult = boardMapper.updateBoard(params);
 		}
+		
 		return (queryResult == 1)?true:false;
 	}
 	
