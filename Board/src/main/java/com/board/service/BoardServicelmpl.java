@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.board.domain.BoardDTO;
 import com.board.mapper.BoardMapper;
+import com.board.paging.PaginationInfo;
 
 @Service
 public class BoardServicelmpl implements BoardService{
@@ -51,14 +52,20 @@ public class BoardServicelmpl implements BoardService{
 	
 	//삭제되지 않은 전체 게시글 조회
 	@Override
-	public List<BoardDTO> getBoardList(){
-		List<BoardDTO> boardList = Collections.emptyList();		//비어 있는 리스트 선언
-		
-		int boardTotalCount = boardMapper.selectBoardTotalCount();			//삭제되지 않은 전체 게시글 수 카운팅
-		
+	public List<BoardDTO> getBoardList(BoardDTO params) {
+		List<BoardDTO> boardList = Collections.emptyList();
+
+		int boardTotalCount = boardMapper.selectBoardTotalCount(params);
+
+		PaginationInfo paginationInfo = new PaginationInfo(params);
+		paginationInfo.setTotalRecordCount(boardTotalCount);
+
+		params.setPaginationInfo(paginationInfo);
+
 		if (boardTotalCount > 0) {
-			boardList = boardMapper.selectBoardList();
+			boardList = boardMapper.selectBoardList(params);
 		}
+
 		return boardList;
 	}
 }
