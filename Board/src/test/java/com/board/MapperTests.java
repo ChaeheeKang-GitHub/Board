@@ -84,7 +84,7 @@ class MapperTests {
 			}
 		}
 	}
-	
+	/*
 	@Test
 	public void testSelectList() {
 		int boardTotalCount = boardMapper.selectBoardTotalCount();
@@ -100,6 +100,7 @@ class MapperTests {
 			
 		}
 	}
+	*/
 	//삭제되지 않은 게시글을 전부 조회하는 메소드
 	@Test
 	public void selectBoardList() {
